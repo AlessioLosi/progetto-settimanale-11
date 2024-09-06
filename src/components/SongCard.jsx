@@ -1,16 +1,25 @@
 import React from 'react';
+import { Card, Button} from 'react-bootstrap';
+import { Col, Row, Container } from 'react-bootstrap';
+import '../App.css'
+
 
 const SongCard = ({ song, onPlay, onLike, isLiked }) => {
   return (
-    <div className="song-card">
-      <img src={song.album.cover_medium} alt={song.title} />
-      <h5>{song.title}</h5>
-      <p>{song.artist.name}</p>
-      <button onClick={() => onPlay(song)}>Play</button>
-      <button onClick={() => onLike(song.id)}>
+
+    <Card className="h-100">
+      <Card.Img variant="top" src={song.album.cover_medium} />
+      <Card.Body className="d-flex flex-column">
+        <Card.Title>{song.title}</Card.Title>
+        <Card.Text>{song.artist.name}</Card.Text> 
+         <Button onClick={() => onPlay(song)}>Play</Button>
+        <Button onClick={() => onLike(song.id)}>
         {isLiked ? 'Unlike' : 'Like'}
-      </button>
-    </div>
+      </Button>
+      </Card.Body>
+    </Card>
+ 
+
   );
 };
 

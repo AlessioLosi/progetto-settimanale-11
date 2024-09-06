@@ -218,3 +218,28 @@ ul {
   width: 145px;
   height: 40px;
 }
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.card-body {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.music-player {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #000000; 
+  padding: 10px;
+  z-index: 1000; 
+}
+.song-image{width: 70%;}
+
+

@@ -11,7 +11,8 @@ const Search = () => {
       const response = await fetch(`https://striveschool-api.herokuapp.com/api/deezer/search?q=${query}`);
       if (response.ok) {
         const data = await response.json();
-        dispatch(setSongs(data.data)); 
+        const limitedResults = data.data.slice(0, 4);
+        dispatch(setSongs(limitedResults)); 
       } else {
         console.error('Errore nella ricerca');
       }

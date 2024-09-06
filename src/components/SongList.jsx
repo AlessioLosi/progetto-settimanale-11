@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { playSong } from '../redux/actions/Actions';
 import SongCard from './SongCard';
 import { toggleLike } from '../redux/actions/Actions';
+import { Card, Col, Row, Container, Button} from 'react-bootstrap';
 
 const SongList = () => {
   const dispatch = useDispatch();
@@ -17,18 +18,21 @@ const SongList = () => {
     dispatch(toggleLike(songId));
   };
 
-  return (
-    <div className="song-list">
+  return ( <Container >
+    <Row >
       {songs.map(song => (
-        <SongCard
-          key={song.id}
-          song={song}
-          onPlay={handlePlay}
-          onLike={handleLike}
-          isLiked={likedSongs.includes(song.id)}
-        />
+        <Col key={song.id} xs={3} className="mb-4">
+          <SongCard
+            song={song}
+            onPlay={handlePlay}
+            onLike={handleLike}
+            isLiked={likedSongs.includes(song.id)}
+          />
+        </Col>
       ))}
-    </div>
+    </Row>
+  </Container>
+   
   );
 };
 
