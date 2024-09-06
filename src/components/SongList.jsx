@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { playSong } from '../redux/actions/Actions';
 import SongCard from './SongCard';
 import { toggleLike } from '../redux/actions/Actions';
-import { Card, Col, Row, Container, Button} from 'react-bootstrap';
+import { Container,Row,Col } from 'react-bootstrap';
 
 const SongList = () => {
   const dispatch = useDispatch();
@@ -18,10 +18,10 @@ const SongList = () => {
     dispatch(toggleLike(songId));
   };
 
-  return ( <Container >
-    <Row >
+  return ( <Container fluid>
+    <Row className="justify-content-start">
       {songs.map(song => (
-        <Col key={song.id} xs={3} className="mb-4">
+        <Col key={song.id} xs={12} sm={6} md={4} lg={3} className="mb-4">
           <SongCard
             song={song}
             onPlay={handlePlay}
