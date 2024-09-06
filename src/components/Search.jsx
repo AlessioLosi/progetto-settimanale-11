@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { setSongs } from '../redux/actions/Actions';
+import { Button } from 'react-bootstrap';
 
 const Search = () => {
   const [query, setQuery] = useState('');
@@ -29,7 +30,7 @@ const Search = () => {
         onChange={(e) => setQuery(e.target.value)}
         placeholder="Cerca una canzone..."
       />
-      <button onClick={handleSearch}>Cerca</button>
+      <Button variant='primary' onClick={handleSearch}>Cerca</Button>
     </div>
   );
 };
