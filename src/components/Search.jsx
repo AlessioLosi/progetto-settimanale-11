@@ -1,33 +1,35 @@
-// src/components/Search.js
-
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { getSongsAction } from '../redux/actions/Actions';
-import { Button, Form } from 'react-bootstrap';
-import '../App.css'; 
+import { setSongs } from '../redux/actions/Actions';
 
 const Search = () => {
   const [query, setQuery] = useState('');
   const dispatch = useDispatch();
 
-  const handleSearch = () => {
-    if (query.trim()) {
-      dispatch(getSongsAction(query));
+  const handleSearch = async () => {
+    try {
+      const response = await fetch(`https://striveschool-api.herokuapp.com/api/deezer/search?q=${query}`);
+      if (response.ok) {
+        const data = await response.json();
+        dispatch(setSongs(data.data)); 
+      } else {
+        console.error('Errore nella ricerca');
+      }
+    } catch (error) {
+      console.error('Errore nella fetch', error);
     }
   };
 
   return (
-    <Form className="search">
-      <Form.Group controlId="searchForm">
-        <Form.Control
-          type="text"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          placeholder="Cerca"
-        />
-        <Button variant="primary" type="button" onClick={handleSearch}>GO</Button>
-      </Form.Group>
-    </Form>
+    <div>
+      <input
+        type="text"
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+        placeholder="Cerca una canzone..."
+      />
+      <button onClick={handleSearch}>Cerca</button>
+    </div>
   );
 };
 

@@ -1,17 +1,13 @@
-
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { playSong, toggleLike, setError } from '../redux/actions/Actions';
+import { playSong } from '../redux/actions/Actions';
 import SongCard from './SongCard';
-import Search from './Search';
+import { toggleLike } from '../redux/actions/Actions';
 
 const SongList = () => {
   const dispatch = useDispatch();
-  const songs = useSelector(state => state.list);
-  const likedSongs = useSelector(state => state.likedSongs);
-  const error = useSelector(state => state.error);
-
-  useEffect(() => {'sabrina carpenter'}, [dispatch]);
+  const songs = useSelector(state => state.songs.list);
+  const likedSongs = useSelector(state => state.songs.likedSongs);
 
   const handlePlay = (song) => {
     dispatch(playSong(song));
@@ -22,21 +18,16 @@ const SongList = () => {
   };
 
   return (
-    <div>
-      <h1>Song List</h1>
-      <Search /> 
-      {error && <p>Error: {error}</p>}
-      <div className="song-list">
-        {songs.map(song => (
-          <SongCard
-            key={song.id}
-            song={song}
-            onPlay={handlePlay}
-            onLike={handleLike}
-            isLiked={likedSongs.includes(song.id)}
-          />
-        ))}
-      </div>
+    <div className="song-list">
+      {songs.map(song => (
+        <SongCard
+          key={song.id}
+          song={song}
+          onPlay={handlePlay}
+          onLike={handleLike}
+          isLiked={likedSongs.includes(song.id)}
+        />
+      ))}
     </div>
   );
 };
