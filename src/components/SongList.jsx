@@ -1,25 +1,17 @@
+
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { playSong, toggleLike } from '../redux/actions/Actions';
+import { playSong, toggleLike, setError } from '../redux/actions/Actions';
 import SongCard from './SongCard';
 import Search from './Search';
-import { getSongsAction } from '../redux/actions/Actions';
 
 const SongList = () => {
   const dispatch = useDispatch();
   const songs = useSelector(state => state.list);
   const likedSongs = useSelector(state => state.likedSongs);
+  const error = useSelector(state => state.error);
 
-
-  const searchSongs = (query) => {
-    dispatch(getSongsAction(query));
-  };
-
-
-  useEffect(() => {
-    searchSongs('sabrina carpenter'); 
-  }, [dispatch]);
-
+  useEffect(() => {'sabrina carpenter'}, [dispatch]);
 
   const handlePlay = (song) => {
     dispatch(playSong(song));
@@ -28,9 +20,12 @@ const SongList = () => {
   const handleLike = (songId) => {
     dispatch(toggleLike(songId));
   };
+
   return (
     <div>
-      <Search onSearch={searchSongs} /> 
+      <h1>Song List</h1>
+      <Search /> 
+      {error && <p>Error: {error}</p>}
       <div className="song-list">
         {songs.map(song => (
           <SongCard

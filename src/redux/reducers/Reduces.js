@@ -1,4 +1,4 @@
-import { PLAY_SONG, TOGGLE_LIKE, SET_SONGS, SET_ERROR} from '../actions/Actions';
+import { PLAY_SONG, TOGGLE_LIKE, GET_SONGS, SET_ERROR } from '../actions/Actions';
 
 const initialState = {
   list: [],
@@ -22,11 +22,11 @@ const songsReducer = (state = initialState, action) => {
           ? state.likedSongs.filter(id => id !== songId)
           : [...state.likedSongs, songId],
       };
-    case SET_SONGS:
+    case GET_SONGS:
       return {
         ...state,
         list: action.payload,
-        error: null, 
+        error: null,
       };
     case SET_ERROR:
       return {

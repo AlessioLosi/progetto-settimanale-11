@@ -14,7 +14,6 @@ function App() {
       <>
       <ColorSchemesExample/>
       <MainContent/>
-      <SongList/>
      </>
     </div>
   );
